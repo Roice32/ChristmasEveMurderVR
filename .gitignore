@@ -1,6 +1,3 @@
-	# Added by me (& Copilot):
-*.unitypackage
-
 # Ignore everything in the Packages directory
 **/Packages/*
 
@@ -117,5 +114,8 @@
 **/*.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/unity,windows
+
+# Added by me (& ChatGPT):
+*.unitypackage
 **/.vsconfig
 **/UpgradeLog.htm
