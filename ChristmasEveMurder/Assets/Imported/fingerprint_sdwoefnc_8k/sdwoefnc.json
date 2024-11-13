@@ -1,0 +1,155 @@
+{
+    "averageColor": "#808080",
+    "categories": [
+        "brush",
+        "paint brushes",
+        "prints"
+    ],
+    "description": "",
+    "environment": {
+        "biome": "undefined",
+        "region": "undefined"
+    },
+    "id": "sdwoefnc",
+    "json": {
+        "uri": "sdwoefnc.json"
+    },
+    "maps": [
+        {
+            "averageColor": "#121212",
+            "bitDepth": 16,
+            "colorSpace": "sRGB",
+            "maxIntensity": 255,
+            "mimeType": "image/x-exr",
+            "minIntensity": 0,
+            "name": "Brush",
+            "physicalSize": "0.06x0.06",
+            "resolution": "8192x8192",
+            "type": "brush",
+            "uri": "sdwoefnc_8K_Brush.exr"
+        },
+        {
+            "averageColor": "#121212",
+            "bitDepth": 8,
+            "colorSpace": "sRGB",
+            "maxIntensity": 255,
+            "mimeType": "image/jpeg",
+            "minIntensity": 0,
+            "name": "Brush",
+            "physicalSize": "0.06x0.06",
+            "resolution": "8192x8192",
+            "type": "brush",
+            "uri": "sdwoefnc_8K_Brush.jpg"
+        }
+    ],
+    "meta": [
+        {
+            "key": "scanArea",
+            "name": "Scan Area",
+            "value": "0.06x0.06 m"
+        },
+        {
+            "key": "height",
+            "name": "Height",
+            "value": "20 m"
+        },
+        {
+            "key": "tileable",
+            "name": "Tileable",
+            "value": false
+        },
+        {
+            "key": "texelDensity",
+            "name": "Texel Density",
+            "value": "131072 px/m"
+        },
+        {
+            "key": "calibration",
+            "name": "Calibration",
+            "value": "GretagMacbeth ColorChecker Color Rendition Chart"
+        },
+        {
+            "key": "scanner",
+            "name": "Scanner",
+            "value": "MKX"
+        }
+    ],
+    "name": "Fingerprint",
+    "points": 1,
+    "previews": {
+        "images": [
+            {
+                "contentLength": 181345,
+                "resolution": "840x840",
+                "uri": "sdwoefnc_8K_Brush_Grid_840.png",
+                "tags": [
+                    "thumb",
+                    "retina"
+                ]
+            },
+            {
+                "contentLength": 12496075,
+                "resolution": "3840x2160",
+                "uri": "sdwoefnc_Popup_3840.png",
+                "tags": [
+                    "preview",
+                    "retina"
+                ]
+            }
+        ],
+        "relativeSize": "1x1"
+    },
+    "properties": [],
+    "references": [],
+    "tags": [
+        "paint brush",
+        "archviz"
+    ],
+    "version": 2,
+    "texelDensity": 136533,
+    "physicalSize": null,
+    "process_date": "2024-04-18 09:29:43",
+    "texture_type": "basic",
+    "highest_available_res": 8192,
+    "models": [],
+    "semanticTags": {
+        "minSize": 0.06,
+        "name": "Fingerprint",
+        "subject_matter": "manmade",
+        "industry": [
+            "archviz",
+            "VFX",
+            "games"
+        ],
+        "contains": [
+            "paint brush"
+        ],
+        "locations": {
+            "Global": {
+                "Global": {}
+            }
+        },
+        "environment": [],
+        "maxSize": 0.06,
+        "latin_name": [],
+        "architectural_style": {},
+        "interior_exterior": [
+            "interior",
+            "exterior"
+        ],
+        "resolution": 8192,
+        "asset_type": "brush",
+        "orientation": [
+            "wall",
+            "floor",
+            "ceiling"
+        ]
+    },
+    "assetCategories": {
+        "brush": {
+            "imprint": {}
+        }
+    },
+    "pack": null,
+    "comp_version": 1
+}
