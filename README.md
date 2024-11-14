@@ -33,6 +33,9 @@ Evidence marker:
 ![Evidence Marker](Modelling//StobokEvidenceMarker.png)
 
 ## Scenes:
+Living room of the crime scene:
+![Living room](SceneImages//LivingRoom.png)
+
 Detective's Office, during witness interrogation with evidence:
 ![Interrogating witness in office](SceneImages/Interrogation.png)
 
