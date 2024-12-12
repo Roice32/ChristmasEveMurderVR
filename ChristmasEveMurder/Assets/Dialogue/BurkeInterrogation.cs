@@ -21,7 +21,8 @@ public static class BurkeInterrogation
         );
 
         StartEntry = new DialogueEntry(
-            dialogueLine: "Hello there! Would you like to hear a story?",
+            dialogueLine: "So, detective, w-what is it you wanted to talk about?",
+            audioFile: "Voicelines/BurkeInterrogationStart",
             isChoiceNode: true,
             choice1Text: "Yes, please!",
             choice1Next: StoryEntry,
