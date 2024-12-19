@@ -13,9 +13,13 @@ public class StringConnection
         StringObject = stringObject;
     }
 
-    // Check if two pins match this connection (in either order)
     public bool Matches(GameObject pin1, GameObject pin2)
     {
         return (StartPin == pin1 && EndPin == pin2) || (StartPin == pin2 && EndPin == pin1);
+    }
+
+    public bool HasPin(GameObject pin)
+    {
+        return StartPin == pin || EndPin == pin;
     }
 }
