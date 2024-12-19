@@ -8,6 +8,9 @@
 
 ### @ FII UAIC 2024
 
+# Week 12 Progress
+[Murderboard Interaction v1](https://youtu.be/0P66ETJ7LRU)
+
 # Week 11 Progress
 [Interrogation Dialogue System v1](https://youtu.be/ual7n2ilVeM)
 
