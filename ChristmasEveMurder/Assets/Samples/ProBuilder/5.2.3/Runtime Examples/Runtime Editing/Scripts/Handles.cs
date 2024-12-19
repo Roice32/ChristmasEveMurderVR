@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.ProBuilder;
@@ -6,7 +5,7 @@ using UnityEngine.Rendering;
 
 namespace ProBuilder.Examples
 {
-	class Handles : MonoBehaviour
+    class Handles : MonoBehaviour
     {
         static Handles s_Instance;
 		static bool s_Initialized;
