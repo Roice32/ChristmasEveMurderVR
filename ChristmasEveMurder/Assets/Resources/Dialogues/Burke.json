@@ -1,0 +1,44 @@
+{
+  "SpeakerName": "Burke",
+  "Entries": {
+    "Start": {
+      "DialogueLine": "So, detective, w-what is it you wanted to talk about?",
+      "AudioFile": "Voicelines/BurkeInterrogationStart",
+      "IsChoiceNode": true,
+      "Choice1Text": "How are you holdin' up?",
+      "Choice1Next": "EmpathyEntry1",
+      "Choice2Text": "Why did you kill her? You sick bastard.",
+      "Choice2Next": "DefensiveEndEntry2"
+    },
+    "EmpathyEntry1": {
+      "DialogueLine": "Well... It's hard. I appreciate you asking, but I-- I-- Sorry.",
+      "AudioFile": "Voicelines/BurkeEmpathy1",
+      "IsChoiceNode": false,
+      "NextEntry": "EmpathyEntry2"
+    },
+    "EmpathyEntry2": {
+      "DialogueLine": "Let's... just get on with this. How can I help you solve her murder?",
+      "AudioFile": "Voicelines/BurkeEmpathy2",
+      "IsChoiceNode": true,
+      "Choice1Text": "Do you know anyone who had a grudge against her?",
+      "Choice1Next": "InfoEntry1",
+      "Choice2Text": "I never mentioned she was murdered...",
+      "Choice2Next": "DefensiveEndEntry1"
+    },
+    "InfoEntry1": {
+      "DialogueLine": "I... I don't know. She was a good person. I can't think of anyone who would want to hurt her.",
+      "AudioFile": "Voicelines/BurkeInfo",
+      "IsChoiceNode": false
+    },
+    "DefensiveEndEntry1": {
+      "DialogueLine": "Uh... well... I assumed so...",
+      "AudioFile": "Voicelines/BurkeDefensiveEnd1",
+      "IsChoiceNode": false
+    },
+    "DefensiveEndEntry2": {
+      "DialogueLine": "Oh, is that how you wanna play? I ain't sayin' another word without my lawyer.",
+      "AudioFile": "Voicelines/BurkeDefensiveEnd2",
+      "IsChoiceNode": false
+    }
+  }
+}

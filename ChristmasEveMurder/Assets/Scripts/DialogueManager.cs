@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using Newtonsoft.Json;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class DialogueManager : MonoBehaviour
     private TMP_Text Choice1Text;
     private TMP_Text Choice2Text;
 
-    public string SpeakerName { get; private set; }
+    private Dialogue dialogue;
     public DialogueEntry CurrentEntry { get; private set; }
 
     private void Start()
@@ -25,11 +26,17 @@ public class DialogueManager : MonoBehaviour
         DialogueUI.SetActive(false);
     }
 
-    public void StartDialogue()
+    private void LoadDialogue(string speakerName)
     {
-        SpeakerName = BurkeInterrogation.SpeakerName;
-        SpeakerText.text = SpeakerName;
-        CurrentEntry = BurkeInterrogation.StartEntry;
+        TextAsset jsonText = Resources.Load<TextAsset>($"Dialogues/{speakerName}");
+        dialogue = JsonConvert.DeserializeObject<Dialogue>(jsonText.text);
+        SpeakerText.text = dialogue.SpeakerName;
+        CurrentEntry = dialogue.Entries["Start"];
+    }
+
+    public void StartDialogue(string speakerName)
+    {
+        LoadDialogue(speakerName);
         DialogueUI.SetActive(true);
         DisplayEntry();
     }
@@ -50,7 +57,6 @@ public class DialogueManager : MonoBehaviour
 
         DialogueText.text = CurrentEntry.DialogueLine;
 
-        // Play audio if available
         if (!string.IsNullOrEmpty(CurrentEntry.AudioFile))
         {
             AudioClip clip = Resources.Load<AudioClip>(CurrentEntry.AudioFile);
@@ -79,20 +85,29 @@ public class DialogueManager : MonoBehaviour
 
     public void GoToNextEntry(int choice)
     {
-        DialogueEntry nextEntry = null;
+        string nextEntryKey = null;
         switch (choice)
         {
             case 0:
-                nextEntry = CurrentEntry.NextEntry;
-            break;
+                nextEntryKey = CurrentEntry.NextEntry;
+                break;
             case 1:
-                nextEntry = CurrentEntry.Choice1Next;
-            break;
+                nextEntryKey = CurrentEntry.Choice1Next;
+                break;
             case 2:
-                nextEntry= CurrentEntry.Choice2Next;
-            break;
+                nextEntryKey = CurrentEntry.Choice2Next;
+                break;
         }
-        CurrentEntry = nextEntry;
+
+        if (!string.IsNullOrEmpty(nextEntryKey) && dialogue.Entries.ContainsKey(nextEntryKey))
+        {
+            CurrentEntry = dialogue.Entries[nextEntryKey];
+        }
+        else
+        {
+            CurrentEntry = null;
+        }
+
         DisplayEntry();
     }
 }
