@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class Dialogue
 {
@@ -21,21 +22,59 @@ public class Dialogue
         return Entries[CurrentEntry];
     }
 
+    public void AddStressPoints(int points)
+    {
+        StressPoints += points;
+        if (StressPoints < 0)
+        {
+            StressPoints = 0;
+        }
+        if (StressPoints > 5)
+        {
+            StressPoints = 5;
+        }
+    }
+
+    private bool IsGoingToLie()
+    {
+        return StressPoints > 3;
+    }
+
     public void GoToNextEntry(int choice)
     {
-        string nextEntryKey = null;
+        Choice selectedChoice = null;
         switch (choice)
         {
             case 0:
-                nextEntryKey = GetCurrentEntry().NextEntry;
+                selectedChoice = GetCurrentEntry().ChoiceNext;
                 break;
             case 1:
-                nextEntryKey = GetCurrentEntry().Choice1Next;
+                selectedChoice = GetCurrentEntry().Choice1;
                 break;
             case 2:
-                nextEntryKey = GetCurrentEntry().Choice2Next;
+                selectedChoice = GetCurrentEntry().Choice2;
                 break;
         }
+
+        if (selectedChoice == null)
+        {
+            CurrentEntry = null;
+            IsInProgress = false;
+            return;
+        }
+
+        AddStressPoints(selectedChoice.StressPoints);
+
+        string nextEntryKey = null;
+        if (IsGoingToLie())
+        {
+            nextEntryKey = selectedChoice.NextLie;
+        }
+        else
+        {
+            nextEntryKey = selectedChoice.NextTruth;
+        }
+
         if (!string.IsNullOrEmpty(nextEntryKey) && Entries.ContainsKey(nextEntryKey))
         {
             CurrentEntry = nextEntryKey;

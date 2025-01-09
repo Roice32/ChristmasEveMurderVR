@@ -7,46 +7,120 @@
   "Entries": {
     "Start": {
       "DialogueLine": "So, detective, w-what is it you wanted to talk about?",
-      "AudioFile": "Voicelines/BurkeInterrogationStart",
+      "AudioFile": "Voicelines/Burke/Start",
       "IsChoiceNode": true,
-      "Choice1Text": "How are you holdin' up?",
-      "Choice1Next": "EmpathyEntry1",
-      "Choice2Text": "Why did you kill her? You sick bastard.",
-      "Choice2Next": "DefensiveEndEntry2"
+      "Choice1": {
+        "Text": "How are you holdin' up?",
+        "StressPoints": -1,
+        "NextTruth": "1T"
+      },
+      "Choice2": {
+        "Text": "Why did you kill her? You sick bastard.",
+        "StressPoints": 2,
+        "NextTruth": "2T",
+        "NextLie": "2L"
+      }
     },
-    "EmpathyEntry1": {
+
+    "1T": {
       "DialogueLine": "Well... It's hard. I appreciate you asking, but I-- I-- Sorry.",
-      "AudioFile": "Voicelines/BurkeEmpathy1",
-      "IsChoiceNode": false,
-      "NextEntry": "EmpathyEntry2"
+      "AudioFile": "Voicelines/Burke/1T",
+      "ChoiceNext": {
+        "NextTruth": "1T-T"
+      }
     },
-    "EmpathyEntry2": {
+
+    "1T-T": {
       "DialogueLine": "Let's... just get on with this. How can I help you solve her murder?",
-      "AudioFile": "Voicelines/BurkeEmpathy2",
+      "AudioFile": "Voicelines/Burke/1T-T",
       "IsChoiceNode": true,
-      "Choice1Text": "Do you know anyone who had a grudge against her?",
-      "Choice1Next": "InfoEntry1",
-      "Choice2Text": "I never mentioned she was murdered...",
-      "Choice2Next": "DefensiveEndEntry1"
+      "Choice1": {
+        "Text": "Do you know anyone who had a grudge against her?",
+        "StressPoints": 0,
+        "NextTruth": "1T-T1T"
+      },
+      "Choice2": {
+        "Text": "I never mentioned she was murdered...",
+        "StressPoints": 2,
+        "NextTruth": "1T-T2T"
+      }
     },
-    "InfoEntry1": {
+
+    "1T-T1T": {
       "DialogueLine": "I... I don't know. She was a good person. I can't think of anyone who would want to hurt her.",
-      "AudioFile": "Voicelines/BurkeInfo",
-      "IsChoiceNode": false
+      "AudioFile": "Voicelines/Burke/1T-T1T",
+      "ChoiceNext": {
+        "NextTruth": "1T-T1T-T"
+      }
     },
-    "DefensiveEndEntry1": {
+
+    "1T-T2T": {
       "DialogueLine": "Uh... well... I assumed so...",
-      "AudioFile": "Voicelines/BurkeDefensiveEnd1",
-      "IsChoiceNode": false
+      "AudioFile": "Voicelines/Burke/1T-T2T",
+      "ChoiceNext": {
+        "NextTruth": "1T-T2T-T",
+        "StressPoints": 1
+      }
     },
-    "DefensiveEndEntry2": {
+
+    "2T": {
       "DialogueLine": "Oh, is that how you wanna play? I ain't sayin' another word without my lawyer.",
-      "AudioFile": "Voicelines/BurkeDefensiveEnd2",
-      "IsChoiceNode": false
+      "AudioFile": "Voicelines/Burke/2T"
     },
+
+    "2L": {
+      "DialogueLine": "You got it all wrong! I didn't do it! You've got to believe me!",
+      "AudioFile": "Voicelines/Burke/2L",
+      "ChoiceNext": {
+        "NextTruth": "2L-T",
+        "NextLie": "2L-L"
+      }
+    },
+
+    "2L-T": {
+      "DialogueLine": "I was... I was at the bar that night. Ask anyone there.",
+      "AudioFile": "Voicelines/Burke/2L-T"
+    },
+
+    "2L-L": {
+      "DialogueLine": "I don't need to explain myself to you! This is harassment!",
+      "AudioFile": "Voicelines/Burke/2L-L"
+    },
+
+    "1T-T1T-T": {
+      "DialogueLine": "She had her share of arguments, but nothing serious, you know?",
+      "AudioFile": "Voicelines/Burke/1T-T1T-T"
+    },
+
+    "1T-T2T-T": {
+      "DialogueLine": "Alright, you caught me off guard there... What's your next question?",
+      "AudioFile": "Voicelines/Burke/1T-T2-1",
+      "IsChoiceNode": true,
+      "Choice1": {
+        "Text": "Did you love her?",
+        "StressPoints": -1,
+        "NextTruth": "1T-T2T-T1T"
+      },
+      "Choice2": {
+        "Text": "You seem nervous. Are you hiding something?",
+        "StressPoints": 2,
+        "NextTruth": "1T-T2T-T2T"
+      }
+    },
+
+    "1T-T2T-T1T": {
+      "DialogueLine": "Of course I did. She was everything to me.",
+      "AudioFile": "Voicelines/Burke/1T-T2-1T"
+    },
+
+    "1T-T2T-T2T": {
+      "DialogueLine": "N-nervous? Who wouldn't be in my situation? But I'm not hiding anything.",
+      "AudioFile": "Voicelines/Burke/1T-T2-L"
+    },
+
     "ExhaustedDialogue": {
       "DialogueLine": "We've already talked everything there was to talk about.",
-      "IsChoiceNode": false
+      "AudioFile": "Voicelines/Burke/Exhausted"
     }
   }
 }

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class DialogueManager : MonoBehaviour
 {
     private readonly List<string> SPEAKERS = new() { "Burke" };
+    private readonly Vector3 SUSPECT_HEAD_POSITION = new Vector3(0.0f, 1.094f, 0.612f);
 
     [SerializeField] private GameObject DialogueUI;
     [SerializeField] private TMP_Text SpeakerText;
@@ -14,12 +15,15 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private GameObject Choice2;
     [SerializeField] private GameObject ChoiceNext;
     [SerializeField] private AudioSource AudioSource;
+    [SerializeField] private GameObject PlayerCamera;
+    [SerializeField] private GameObject Suspects;
 
     private TMP_Text Choice1Text;
     private TMP_Text Choice2Text;
 
     private Dictionary<string, Dialogue> Dialogues = new();
     private string CurrentSpeaker = null;
+    private GameObject CurrentSuspect = null;
 
     private void Start()
     {
@@ -27,6 +31,7 @@ public class DialogueManager : MonoBehaviour
         Choice1Text = Choice1.transform.Find("ChoiceText").GetComponent<TMP_Text>();
         Choice2Text = Choice2.transform.Find("ChoiceText").GetComponent<TMP_Text>();
         DialogueUI.SetActive(false);
+        DeactivateAllSuspects();
     }
 
     private void PreloadDialogues()
@@ -35,6 +40,29 @@ public class DialogueManager : MonoBehaviour
         {
             TextAsset jsonText = Resources.Load<TextAsset>($"Dialogues/{speaker}");
             Dialogues[speaker] = JsonConvert.DeserializeObject<Dialogue>(jsonText.text);
+        }
+    }
+
+    private void DeactivateAllSuspects()
+    {
+        foreach (Transform suspect in Suspects.transform)
+        {
+            suspect.gameObject.SetActive(false);
+        }
+    }
+
+    public void ActivateSuspect(string suspectName)
+    {
+        Transform suspectTransform = Suspects.transform.Find(suspectName);
+        if (suspectTransform != null)
+        {
+            if (CurrentSuspect != null && CurrentSuspect != suspectTransform.gameObject)
+            {
+                CurrentSuspect.SetActive(false);
+            }
+
+            suspectTransform.gameObject.SetActive(true);
+            CurrentSuspect = suspectTransform.gameObject;
         }
     }
 
@@ -78,9 +106,9 @@ public class DialogueManager : MonoBehaviour
         if (currentEntry.IsChoiceNode)
         {
             Choice1.SetActive(true);
-            Choice1Text.text = currentEntry.Choice1Text;
+            Choice1Text.text = currentEntry.Choice1.Text;
             Choice2.SetActive(true);
-            Choice2Text.text = currentEntry.Choice2Text;
+            Choice2Text.text = currentEntry.Choice2.Text;
             ChoiceNext.SetActive(false);
         }
         else
@@ -91,9 +119,31 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
+    public void AddProximityStressPoints()
+    {
+        Vector3 playerHeadPosition = PlayerCamera.transform.position;
+        float distance = Vector3.Distance(playerHeadPosition, SUSPECT_HEAD_POSITION);
+        int stressPoints = 0;
+        if (distance >= 3.2f)
+        {
+            stressPoints = -1;
+        }
+        if (distance <= 3.0f && distance >= 2.9)
+        {
+            stressPoints = 1;
+        }
+        if (distance <= 2.8)
+        {
+            stressPoints = 2;
+        }
+        Dialogues[CurrentSpeaker].AddStressPoints(stressPoints);
+    }
+
     public void GoToNextEntry(int choice)
     {
+        AddProximityStressPoints();
         Dialogues[CurrentSpeaker].GoToNextEntry(choice);
+        Debug.Log($"Stress level: {Dialogues[CurrentSpeaker].StressPoints}");
         DisplayCurrentEntry();
     }
 }
