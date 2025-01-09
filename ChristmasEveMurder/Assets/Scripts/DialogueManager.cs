@@ -1,9 +1,12 @@
 using UnityEngine;
 using TMPro;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 public class DialogueManager : MonoBehaviour
 {
+    private readonly List<string> SPEAKERS = new() { "Burke" };
+
     [SerializeField] private GameObject DialogueUI;
     [SerializeField] private TMP_Text SpeakerText;
     [SerializeField] private TMP_Text DialogueText;
@@ -15,51 +18,56 @@ public class DialogueManager : MonoBehaviour
     private TMP_Text Choice1Text;
     private TMP_Text Choice2Text;
 
-    private Dialogue dialogue;
-    public DialogueEntry CurrentEntry { get; private set; }
+    private Dictionary<string, Dialogue> Dialogues = new();
+    private string CurrentSpeaker = null;
 
     private void Start()
     {
+        PreloadDialogues();
         Choice1Text = Choice1.transform.Find("ChoiceText").GetComponent<TMP_Text>();
         Choice2Text = Choice2.transform.Find("ChoiceText").GetComponent<TMP_Text>();
-
         DialogueUI.SetActive(false);
     }
 
-    private void LoadDialogue(string speakerName)
+    private void PreloadDialogues()
     {
-        TextAsset jsonText = Resources.Load<TextAsset>($"Dialogues/{speakerName}");
-        dialogue = JsonConvert.DeserializeObject<Dialogue>(jsonText.text);
-        SpeakerText.text = dialogue.SpeakerName;
-        CurrentEntry = dialogue.Entries["Start"];
+        foreach (string speaker in SPEAKERS)
+        {
+            TextAsset jsonText = Resources.Load<TextAsset>($"Dialogues/{speaker}");
+            Dialogues[speaker] = JsonConvert.DeserializeObject<Dialogue>(jsonText.text);
+        }
     }
 
-    public void StartDialogue(string speakerName)
+    public void EnterDialogue(string speakerName)
     {
-        LoadDialogue(speakerName);
+        CurrentSpeaker = speakerName;
+        SpeakerText.text = speakerName;
+        Dialogues[CurrentSpeaker].IsInProgress = true;
+
         DialogueUI.SetActive(true);
-        DisplayEntry();
+        DisplayCurrentEntry();
     }
 
     public void EndDialogue()
     {
         DialogueUI.SetActive(false);
-        CurrentEntry = null;
+        CurrentSpeaker = null;
     }
 
-    private void DisplayEntry()
+    private void DisplayCurrentEntry()
     {
-        if (CurrentEntry == null)
+        var currentEntry = Dialogues[CurrentSpeaker].GetCurrentEntry();
+        if (currentEntry == null)
         {
             EndDialogue();
             return;
         }
 
-        DialogueText.text = CurrentEntry.DialogueLine;
+        DialogueText.text = currentEntry.DialogueLine;
 
-        if (!string.IsNullOrEmpty(CurrentEntry.AudioFile))
+        if (!string.IsNullOrEmpty(currentEntry.AudioFile))
         {
-            AudioClip clip = Resources.Load<AudioClip>(CurrentEntry.AudioFile);
+            AudioClip clip = Resources.Load<AudioClip>(currentEntry.AudioFile);
             if (clip != null)
             {
                 AudioSource.clip = clip;
@@ -67,12 +75,12 @@ public class DialogueManager : MonoBehaviour
             }
         }
 
-        if (CurrentEntry.IsChoiceNode)
+        if (currentEntry.IsChoiceNode)
         {
             Choice1.SetActive(true);
-            Choice1Text.text = CurrentEntry.Choice1Text;
+            Choice1Text.text = currentEntry.Choice1Text;
             Choice2.SetActive(true);
-            Choice2Text.text = CurrentEntry.Choice2Text;
+            Choice2Text.text = currentEntry.Choice2Text;
             ChoiceNext.SetActive(false);
         }
         else
@@ -85,29 +93,7 @@ public class DialogueManager : MonoBehaviour
 
     public void GoToNextEntry(int choice)
     {
-        string nextEntryKey = null;
-        switch (choice)
-        {
-            case 0:
-                nextEntryKey = CurrentEntry.NextEntry;
-                break;
-            case 1:
-                nextEntryKey = CurrentEntry.Choice1Next;
-                break;
-            case 2:
-                nextEntryKey = CurrentEntry.Choice2Next;
-                break;
-        }
-
-        if (!string.IsNullOrEmpty(nextEntryKey) && dialogue.Entries.ContainsKey(nextEntryKey))
-        {
-            CurrentEntry = dialogue.Entries[nextEntryKey];
-        }
-        else
-        {
-            CurrentEntry = null;
-        }
-
-        DisplayEntry();
+        Dialogues[CurrentSpeaker].GoToNextEntry(choice);
+        DisplayCurrentEntry();
     }
 }

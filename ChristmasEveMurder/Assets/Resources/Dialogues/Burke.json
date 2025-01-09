@@ -1,5 +1,9 @@
 {
   "SpeakerName": "Burke",
+  "CurrentEntry": "Start",
+  "IsInProgress": false,
+  "StressPoints": 0,
+
   "Entries": {
     "Start": {
       "DialogueLine": "So, detective, w-what is it you wanted to talk about?",
@@ -38,6 +42,10 @@
     "DefensiveEndEntry2": {
       "DialogueLine": "Oh, is that how you wanna play? I ain't sayin' another word without my lawyer.",
       "AudioFile": "Voicelines/BurkeDefensiveEnd2",
+      "IsChoiceNode": false
+    },
+    "ExhaustedDialogue": {
+      "DialogueLine": "We've already talked everything there was to talk about.",
       "IsChoiceNode": false
     }
   }
