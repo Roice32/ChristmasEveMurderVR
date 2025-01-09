@@ -59,6 +59,8 @@ public class DialogueManager : MonoBehaviour
             if (CurrentSuspect != null && CurrentSuspect != suspectTransform.gameObject)
             {
                 CurrentSuspect.SetActive(false);
+                AudioSource.Stop();
+                DialogueUI.SetActive(false);
             }
 
             suspectTransform.gameObject.SetActive(true);
