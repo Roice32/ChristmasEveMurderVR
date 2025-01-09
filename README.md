@@ -8,6 +8,9 @@
 
 ### @ FII UAIC 2024
 
+# Week 13 Progress
+[Interrogation Stress Mechanic](https://youtu.be/XQo_gG6ArrU)
+
 # Week 12 Progress
 [Murderboard Interaction v1](https://youtu.be/0P66ETJ7LRU)
 
