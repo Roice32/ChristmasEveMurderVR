@@ -806,6 +806,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 48bf7eed3da15ba49b308553f61d77ce, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 48bf7eed3da15ba49b308553f61d77ce, type: 3}
       propertyPath: m_Name
       value: 3d-model
@@ -1300,7 +1304,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 3.1816611, y: 1.9, z: 3.6}
   m_Center: {x: -0.00000017881393, y: -0.00000044703484, z: -0.000000059604645}
