@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 namespace DoorScript
 {
-	[RequireComponent(typeof(AudioSource))]
+    [RequireComponent(typeof(AudioSource))]
 
 
 public class Door : MonoBehaviour {
