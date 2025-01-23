@@ -8,6 +8,14 @@
 
 ### @ FII UAIC 2024
 
+# Week 12 Progress
+[Murderboard Interaction v1](https://youtu.be/0P66ETJ7LRU)
+
+[Transition between scenes](https://youtu.be/g0DdSFh27i8) -holul si camera cu scara sunt făcute in această săptămână
+
+# Week 11 Progress
+[Interrogation Dialogue System v1](https://youtu.be/ual7n2ilVeM)
+
 # Week 7 Progress
 ## Assets downloaded:
 [Corkboard](https://assetstore.unity.com/packages/3d/props/furniture/corkboard-desk-294674)\
