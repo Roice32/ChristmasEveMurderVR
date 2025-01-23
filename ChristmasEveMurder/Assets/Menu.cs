@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
 public class QuestionMarkMenu : MonoBehaviour
@@ -6,7 +6,7 @@ public class QuestionMarkMenu : MonoBehaviour
     public GameObject questionMark;  
     public GameObject menu3D;        
     public Camera mainCamera;       
-    public Vector3 questionMarkOffset = new Vector3(1.0f, -1.0f, 2.0f); // Offset pentru semnul de �ntrebare
+    public Vector3 questionMarkOffset = new Vector3(1.0f, -1.0f, 2.0f); // Offset pentru semnul de întrebare
     public Vector3 menuOffset = new Vector3(1.0f, -0.5f, 2.5f);         // Offset pentru meniu
 
     void Start()
