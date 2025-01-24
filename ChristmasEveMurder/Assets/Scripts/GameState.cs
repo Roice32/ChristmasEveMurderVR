@@ -3,7 +3,8 @@ using System.Collections.Generic;
 public static class GameState
 {
     public static List<string> EvidenceFound { get; set; }
-    public static int LiedCount { get; set; }
+    public static int TOTAL_EVIDENCE_COUNT = 5; // Modify this when final evidence count is determined
+    public static Dictionary<string, int> LiedCount { get; set; }
 
     static GameState()
     {
@@ -12,7 +13,12 @@ public static class GameState
             "RansomNote",
             "Body"
         };
-        LiedCount = 0;
+        LiedCount = new Dictionary<string, int> // Initialize this with 0 in final project
+        {
+            { "Burke", 3 },
+            { "Patsy", 1 },
+            { "John", 0 }
+        };
     }
 
     public static void AddEvidence(string evidence)
@@ -20,8 +26,8 @@ public static class GameState
         EvidenceFound.Add(evidence);
     }
 
-    public static void AddLie()
+    public static void AddLie(string suspectName)
     {
-        LiedCount++;
+        LiedCount[suspectName]++;
     }
 }
