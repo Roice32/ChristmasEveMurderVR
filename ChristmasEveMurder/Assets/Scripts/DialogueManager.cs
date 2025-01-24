@@ -7,6 +7,8 @@ public class DialogueManager : MonoBehaviour
 {
     private readonly List<string> SPEAKERS = new() { "Burke" };
     private readonly Vector3 SUSPECT_HEAD_POSITION = new Vector3(0.0f, 1.094f, 0.612f);
+    private readonly Vector3 EVIDENCE_ON_TABLE_POSITION = new Vector3(-0.531f, 1.0577f, -1.841f);
+    private readonly Quaternion EVIDENCE_ON_TABLE_ROTATION = Quaternion.Euler(180.0f, 0.0f, 90.0f);
 
     [SerializeField] private GameObject DialogueUI;
     [SerializeField] private TMP_Text SpeakerText;
@@ -24,6 +26,9 @@ public class DialogueManager : MonoBehaviour
     private Dictionary<string, Dialogue> Dialogues = new();
     private string CurrentSpeaker = null;
     private GameObject CurrentSuspect = null;
+    private GameObject CurrentEvidence = null;
+    private Vector3 EvidencePreviousPosition;
+    private Quaternion EvidencePreviousRotation;
 
     private void Start()
     {
@@ -70,6 +75,12 @@ public class DialogueManager : MonoBehaviour
 
     public void EnterDialogue(string speakerName)
     {
+        if (CurrentEvidence != null)
+        {
+            EndDialogue();
+            return;
+        }
+
         CurrentSpeaker = speakerName;
         SpeakerText.text = speakerName;
         Dialogues[CurrentSpeaker].IsInProgress = true;
@@ -82,6 +93,11 @@ public class DialogueManager : MonoBehaviour
     {
         DialogueUI.SetActive(false);
         CurrentSpeaker = null;
+        if (CurrentEvidence != null && CurrentEvidence.transform.parent != null)
+        {
+            MoveEvidence(EvidencePreviousPosition, EvidencePreviousRotation);
+            CurrentEvidence = null;
+        }
     }
 
     private void DisplayCurrentEntry()
@@ -91,6 +107,11 @@ public class DialogueManager : MonoBehaviour
         {
             EndDialogue();
             return;
+        }
+
+        if (GameState.EvidenceFound.Contains(Dialogues[CurrentSpeaker].CurrentEntry))
+        {
+            BringEvidenceToTable(Dialogues[CurrentSpeaker].CurrentEntry);
         }
 
         DialogueText.text = currentEntry.DialogueLine;
@@ -119,6 +140,26 @@ public class DialogueManager : MonoBehaviour
             Choice2.SetActive(false);
             ChoiceNext.SetActive(true);
         }
+    }
+
+    private void BringEvidenceToTable(string evidenceName)
+    {
+        var parentObject = GameObject.Find(evidenceName);
+        if (parentObject == null)
+        {
+            return;
+        }
+
+        CurrentEvidence = parentObject.transform.Find("Pic").gameObject;
+        EvidencePreviousPosition = CurrentEvidence.transform.position;
+        EvidencePreviousRotation = CurrentEvidence.transform.rotation;
+
+        MoveEvidence(EVIDENCE_ON_TABLE_POSITION, EVIDENCE_ON_TABLE_ROTATION);
+    }
+
+    private void MoveEvidence(Vector3 position, Quaternion rotation)
+    {
+        CurrentEvidence.transform.SetPositionAndRotation(position, rotation);
     }
 
     public void AddProximityStressPoints()
