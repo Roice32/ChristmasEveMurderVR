@@ -92,6 +92,7 @@ public class DialogueManager : MonoBehaviour
     public void EndDialogue()
     {
         DialogueUI.SetActive(false);
+        AudioSource.Stop();
         CurrentSpeaker = null;
         if (CurrentEvidence != null && CurrentEvidence.transform.parent != null)
         {
