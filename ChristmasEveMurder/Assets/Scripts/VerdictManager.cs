@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Linq;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class VerdictManager : MonoBehaviour
 {
@@ -20,7 +20,13 @@ public class VerdictManager : MonoBehaviour
         CurrentlyAccused = null;
         Suspects.SetActive(true);
         DeactivateEndScreen();
+        StartCoroutine(AwaitSceneFullyLoaded());
         PlayAudio("GeneralAudio", "Narrations/EnterVerdictRoom");
+    }
+
+    IEnumerator AwaitSceneFullyLoaded()
+    {
+        yield return new WaitForEndOfFrame();
     }
 
     private void DeactivateEndScreen()
@@ -99,7 +105,7 @@ public class VerdictManager : MonoBehaviour
 
         PlayAudio("GeneralAudio", "EnvSounds/DrumRoll");
         yield return new WaitForSeconds(3*DELAY);
-        PlayAudio("GeneralAudio", "EnvSounds/DrumRoll");
+        PlayAudio("GeneralAudio", "EnvSounds/TypeWriter");
         SetStatText("FoundTheMurderer", CurrentlyAccused == "Burke" ? "... and you are CORRECT!" : "... and you are WRONG!");
 
         yield return new WaitForSeconds(2*DELAY);
@@ -153,5 +159,24 @@ public class VerdictManager : MonoBehaviour
             audioSource.clip = clip;
             audioSource.Play();
         }
+    }
+
+    public void RestartGame()
+    {
+        GameState.EvidenceFound.Clear();
+        foreach (string speaker in GameState.LiedCount.Keys)
+        {
+            GameState.LiedCount[speaker] = 0;
+        }
+        SceneManager.LoadScene("Hallway", LoadSceneMode.Single); // Change this to intro when fully merged
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
+
+        #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+        #endif
     }
 }

@@ -27,7 +27,7 @@ public class QuickTeleportManager : MonoBehaviour
     {
         string currentSceneName = SceneManager.GetActiveScene().name;
 
-        if (currentSceneName != "Interrogation")
+        if (currentSceneName != "Interrogation" && currentSceneName != "Verdict")
         {
             previouslyLoadedScene = currentSceneName;
             SceneManager.LoadScene("Interrogation", LoadSceneMode.Single);
