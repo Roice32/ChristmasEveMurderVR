@@ -145,7 +145,6 @@ public class DialogueManager : MonoBehaviour
     {
         AddProximityStressPoints();
         Dialogues[CurrentSpeaker].GoToNextEntry(choice);
-        Debug.Log($"Stress level: {Dialogues[CurrentSpeaker].StressPoints}");
         DisplayCurrentEntry();
     }
 }

@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
 
 public class Dialogue
 {
@@ -8,18 +8,32 @@ public class Dialogue
     public string CurrentEntry { get; set; }
     public bool IsInProgress { get; set; }
     public int StressPoints { get; set; }
-
+    public List<string> ExhaustedEvidenceDialogues { get; set; }
     public DialogueEntry GetCurrentEntry()
     {
         if (string.IsNullOrEmpty(CurrentEntry))
         {
             if (IsInProgress)
             {
-                return Entries["ExhaustedDialogue"];
+                GetEvidenceEntry();
+                return Entries[CurrentEntry ?? "ExhaustedDialogue"];
             }
             return null;
         }
         return Entries[CurrentEntry];
+    }
+
+    public void GetEvidenceEntry()
+    {
+        foreach (string evidence in GameState.EvidenceFound)
+        {
+            if (!ExhaustedEvidenceDialogues.Contains(evidence))
+            {
+                ExhaustedEvidenceDialogues.Add(evidence);
+                CurrentEntry = evidence;
+                return;
+            }
+        }
     }
 
     public void AddStressPoints(int points)
@@ -37,7 +51,13 @@ public class Dialogue
 
     private bool IsGoingToLie()
     {
-        return StressPoints > 3;
+        if (SpeakerName == "Burke")
+        {
+            return StressPoints > 3;
+        }
+        else if (SpeakerName == "Patsy")
+            return StressPoints < 2;
+        return new Random().Next(0, 4) == 0;
     }
 
     public void GoToNextEntry(int choice)
@@ -66,7 +86,7 @@ public class Dialogue
         AddStressPoints(selectedChoice.StressPoints);
 
         string nextEntryKey = null;
-        if (IsGoingToLie())
+        if (IsGoingToLie() && selectedChoice.NextLie is not null)
         {
             nextEntryKey = selectedChoice.NextLie;
         }
