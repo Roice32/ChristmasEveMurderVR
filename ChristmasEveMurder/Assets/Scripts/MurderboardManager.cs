@@ -10,7 +10,7 @@ public class MurderboardManager : MonoBehaviour
     private Vector3 originalScale;
 
     private List<StringConnection> stringConnections = new List<StringConnection>();
-    private Dictionary<GameObject, (Vector3 position, GameObject pin)> grabbedPicturesData = new Dictionary<GameObject, (Vector3, GameObject)>();
+    private Dictionary<GameObject, (Vector3 position, Quaternion rotation, GameObject pin)> grabbedPicturesData = new Dictionary<GameObject, (Vector3, Quaternion, GameObject)>();
 
     private GameObject highlightedPicture = null;
     private GameObject associatedPin = null;
@@ -137,7 +137,7 @@ public class MurderboardManager : MonoBehaviour
         // Store the initial position and pin
         if (!grabbedPicturesData.ContainsKey(highlightedPicture))
         {
-            grabbedPicturesData[highlightedPicture] = (highlightedPicture.transform.position, associatedPin);
+            grabbedPicturesData[highlightedPicture] = (highlightedPicture.transform.position, highlightedPicture.transform.rotation, associatedPin);
         }
 
         // Disable the pin object
@@ -158,7 +158,7 @@ public class MurderboardManager : MonoBehaviour
     {
         if (grabbedPicturesData.TryGetValue(pictureObject, out var data))
         {
-            var (initialPosition, pinObject) = data;
+            var (initialPosition, initialRotation, pinObject) = data;
 
             // Stop any velocity
             Rigidbody rb = pictureObject.GetComponent<Rigidbody>();
@@ -170,7 +170,7 @@ public class MurderboardManager : MonoBehaviour
 
             // Reset position and rotation
             pictureObject.transform.position = initialPosition;
-            pictureObject.transform.rotation = Quaternion.Euler(90, 0, 90);
+            pictureObject.transform.rotation = initialRotation;
 
             grabbedPicturesData.Remove(pictureObject);
 

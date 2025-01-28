@@ -1,0 +1,181 @@
+{
+  "SpeakerName": "Burke",
+  "CurrentEntry": "Start",
+  "IsInProgress": false,
+  "StressPoints": 0,
+  "ExhaustedEvidenceDialogues": [],
+
+  "Entries": {
+    "Start": {
+      "DialogueLine": "So, detective, w-what is it you wanted to talk about?",
+      "AudioFile": "Voicelines/Burke/Start",
+      "IsChoiceNode": true,
+      "Choice1": {
+        "Text": "How are you holdin' up?",
+        "StressPoints": -1,
+        "NextTruth": "1T"
+      },
+      "Choice2": {
+        "Text": "Why did you kill her? You sick bastard.",
+        "StressPoints": 2,
+        "NextTruth": "2T",
+        "NextLie": "2L"
+      }
+    },
+
+    "1T": {
+      "DialogueLine": "Well... It's hard. I appreciate you asking, but I-- I-- Sorry.",
+      "AudioFile": "Voicelines/Burke/1T",
+      "ChoiceNext": {
+        "NextTruth": "1T-T"
+      }
+    },
+
+    "1T-T": {
+      "DialogueLine": "Let's... just get on with this. How can I help you solve her murder?",
+      "AudioFile": "Voicelines/Burke/1T-T",
+      "IsChoiceNode": true,
+      "Choice1": {
+        "Text": "Do you know anyone who had a grudge against her?",
+        "StressPoints": 0,
+        "NextTruth": "1T-T1T"
+      },
+      "Choice2": {
+        "Text": "I never mentioned she was murdered...",
+        "StressPoints": 2,
+        "NextTruth": "1T-T2T"
+      }
+    },
+
+    "1T-T1T": {
+      "DialogueLine": "I... I don't know. She was a good person. I can't think of anyone who would want to hurt her.",
+      "AudioFile": "Voicelines/Burke/1T-T1T",
+      "ChoiceNext": {
+        "NextTruth": "1T-T1T-T"
+      }
+    },
+
+    "1T-T2T": {
+      "DialogueLine": "Uh... well... I assumed so...",
+      "AudioFile": "Voicelines/Burke/1T-T2T",
+      "ChoiceNext": {
+        "NextTruth": "1T-T2T-T",
+        "StressPoints": 1
+      }
+    },
+
+    "2T": {
+      "DialogueLine": "Oh, is that how you wanna play? I ain't sayin' another word without my lawyer.",
+      "AudioFile": "Voicelines/Burke/2T"
+    },
+
+    "2L": {
+      "DialogueLine": "You got it all wrong! I didn't do it! You've got to believe me!",
+      "AudioFile": "Voicelines/Burke/2L",
+      "ChoiceNext": {
+        "NextTruth": "2L-T",
+        "NextLie": "2L-L"
+      }
+    },
+
+    "2L-T": {
+      "DialogueLine": "I was... I was at the bar that night. Ask anyone there.",
+      "AudioFile": "Voicelines/Burke/2L-T"
+    },
+
+    "2L-L": {
+      "DialogueLine": "I don't need to explain myself to you! This is harassment!",
+      "AudioFile": "Voicelines/Burke/2L-L"
+    },
+
+    "1T-T1T-T": {
+      "DialogueLine": "She had her share of arguments, but nothing serious, you know?",
+      "AudioFile": "Voicelines/Burke/1T-T1T-T"
+    },
+
+    "1T-T2T-T": {
+      "DialogueLine": "Alright, you caught me off guard there... What's your next question?",
+      "AudioFile": "Voicelines/Burke/1T-T2-1",
+      "IsChoiceNode": true,
+      "Choice1": {
+        "Text": "Did you love her?",
+        "StressPoints": -1,
+        "NextTruth": "1T-T2T-T1T"
+      },
+      "Choice2": {
+        "Text": "You seem nervous. Are you hiding something?",
+        "StressPoints": 2,
+        "NextTruth": "1T-T2T-T2T"
+      }
+    },
+
+    "1T-T2T-T1T": {
+      "DialogueLine": "Of course I did. She was everything to me.",
+      "AudioFile": "Voicelines/Burke/1T-T2-1T"
+    },
+
+    "1T-T2T-T2T": {
+      "DialogueLine": "N-nervous? Who wouldn't be in my situation? But I'm not hiding anything.",
+      "AudioFile": "Voicelines/Burke/1T-T2-L"
+    },
+
+    "ExhaustedDialogue": {
+      "DialogueLine": "We've already talked everything there was to talk about.",
+      "AudioFile": "Voicelines/Burke/Exhausted"
+    },
+
+    "RansomNote": {
+      "DialogueLine": "That ransom note... I've read it. I wish I hadn't.",
+      "AudioFile": "Voicelines/Burke/RansomNote",
+      "IsChoiceNode": true,
+      "Choice1": {
+        "Text": "That sum is very specific...",
+        "NextTruth": "RansomNote1T"
+      },
+      "Choice2": {
+        "Text": "Does the writing seem familiar to you?",
+        "StressPoints": 2,
+        "NextTruth": "RansomNote2T",
+        "NextLie": "RansomNote2L"
+      }
+    },
+
+    "RansomNote1T": {
+      "DialogueLine": "Yes, they must've based it on something... They can't be total strangers to us.",
+      "AudioFile": "Voicelines/Burke/RansomNote1T"
+    },
+
+    "RansomNote2T": {
+      "DialogueLine": "I... I don't know. I can't think straight right now.",
+      "AudioFile": "Voicelines/Burke/RansomNote2T",
+      "ChoiceNext": {
+        "NextTruth": "RansomNote2T-T"
+      }
+    },
+
+    "RansomNote2T-T": {
+      "DialogueLine": "You think you can catch them based on that? I don't know...",
+      "AudioFile": "Voicelines/Burke/RansomNote2T-T"
+    },
+
+    "RansomNote2L": {
+      "DialogueLine": "Uhm.. No, of course not. No, I don't recognize it. Why would I?",
+      "AudioFile": "Voicelines/Burke/RansomNote2L",
+      "ChoiceNext": {
+        "StressPoints": 2,
+        "NextTruth": "RansomNote2L-T",
+        "NextLie": "2L-L"
+      }
+    },
+
+    "RansomNote2L-T": {
+      "DialogueLine": "I'm sorry, I'm on edge.",
+      "AudioFile": "Voicelines/Burke/RansomNote2L-T"
+    },
+
+    "Body": {
+      "DialogueLine": "That's... how you found her? Oh, God...",
+      "AudioFile": "Voicelines/Burke/Body"
+    }
+  }
+}
