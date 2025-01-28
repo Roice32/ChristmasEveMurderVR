@@ -3,95 +3,71 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class InteractionTrigger : MonoBehaviour
 {
-    public GameObject placuta; // Plăcuța care apare
-    public ParticleSystem sclipici; // Sistemul de particule pentru sclipici
-    public AudioClip naratiuneAudio; // Fișierul audio pentru narativă
-    public float durataSclipici = 2.0f; // Durata în secunde pentru sclipici
-    public float durataNaratiune; // Durata narativului (calculată automat)
+    public GameObject stobok; 
+    public ParticleSystem sclipirici; 
+    public float sparkleTime = 2.0f; 
+    private bool interaction = false; 
 
-    private AudioSource audioSource;
-    private bool interacțiuneDeclanșată = false; // Pentru a preveni re-declanșarea
-
-    // Adăugăm referință la XRGrabInteractable
     private XRGrabInteractable grabInteractable;
+    private XRSimpleInteractable simpleInteractable;
 
     private void Start()
     {
-        // Asigură-te că plăcuța și sclipicii sunt ascunse la început
-        if (placuta != null) placuta.SetActive(false);
-        if (sclipici != null) sclipici.gameObject.SetActive(false);
+        if (stobok != null) stobok.SetActive(false);
+        if (sclipirici != null) sclipirici.gameObject.SetActive(false);
 
-        // Adaugă un AudioSource component dacă nu există deja
-        audioSource = GetComponent<AudioSource>();
-        if (audioSource == null)
-        {
-            audioSource = gameObject.AddComponent<AudioSource>();
-        }
-
-        // Setează durata narativului dacă audio este prezent
-        if (naratiuneAudio != null)
-        {
-            durataNaratiune = naratiuneAudio.length;
-        }
-
-        // Ia referință la componenta XRGrabInteractable
         grabInteractable = GetComponent<XRGrabInteractable>();
+        simpleInteractable = GetComponent<XRSimpleInteractable>();
 
-        // Asigură-te că sunt adăugate evenimentele
         if (grabInteractable != null)
         {
-            grabInteractable.onSelectEntered.AddListener(DeclanseazaEveniment); // La apucare
-            grabInteractable.onSelectExited.AddListener(OpresteEveniment);    // La eliberare (opțional)
+            grabInteractable.onSelectEntered.AddListener(EventStart);
+            grabInteractable.onSelectExited.AddListener(StopEvent);   
+        }
+
+        else if (simpleInteractable != null)
+        {
+            simpleInteractable.onSelectEntered.AddListener(EventStart); 
+            simpleInteractable.onSelectExited.AddListener(StopEvent);     
         }
     }
 
-    private void DeclanseazaEveniment(XRBaseInteractor interactor)
+    public void MarkEvidenceFound(string name)
     {
-        // Afișează plăcuța permanent
-        if (placuta != null)
+        GameState.EvidenceFound.Add(name);
+    }
+
+    private void EventStart(XRBaseInteractor interactor)
+    {
+        if (stobok != null)
         {
-            placuta.SetActive(true);
+            stobok.SetActive(true);
         }
 
-        // Activează și pornește sclipicii temporar
-        if (sclipici != null)
+        if (sclipirici != null)
         {
-            sclipici.gameObject.SetActive(true);
-            sclipici.Play();
-            Invoke(nameof(OpresteSclipicii), durataSclipici);
-        }
-
-        // Pornește narativul audio
-        if (naratiuneAudio != null && audioSource != null)
-        {
-            audioSource.clip = naratiuneAudio;
-            audioSource.Play();
+            sclipirici.gameObject.SetActive(true);
+            sclipirici.Play();
+            Invoke(nameof(StopSparkles), sparkleTime);
         }
     }
 
-    private void OpresteEveniment(XRBaseInteractor interactor)
+    private void StopEvent(XRBaseInteractor interactor)
     {
-        // Oprește narativul audio (opțional)
-        if (audioSource != null && audioSource.isPlaying)
-        {
-            audioSource.Stop();
-        }
 
-        // Poți decide să oprești efectul de sclipici la eliberare (opțional)
-        // Oprește sistemul de particule și ascunde-l
-        if (sclipici != null)
+        if (sclipirici != null)
         {
-            sclipici.Stop();
-            sclipici.gameObject.SetActive(false);
+            sclipirici.Stop();
+            sclipirici.gameObject.SetActive(false);
         }
     }
 
-    private void OpresteSclipicii()
+    private void StopSparkles()
     {
-        if (sclipici != null)
+        if (sclipirici != null)
         {
-            sclipici.Stop();
-            sclipici.gameObject.SetActive(false);
+            sclipirici.Stop();
+            sclipirici.gameObject.SetActive(false);
         }
     }
 }

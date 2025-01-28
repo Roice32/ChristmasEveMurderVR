@@ -24,11 +24,6 @@ public class QuestionMarkMenu : MonoBehaviour
         {
             PositionRelativeToCamera(menu3D, menuOffset);
         }
-
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            ToggleMenu();
-        }
     }
 
     void PositionRelativeToCamera(GameObject obj, Vector3 offset)

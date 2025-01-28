@@ -101,12 +101,20 @@ public class VerdictManager : MonoBehaviour
 
         yield return new WaitForSeconds(2*DELAY);
         PlayAudio("GeneralAudio", "EnvSounds/Typewriter");
-        SetStatText("Accused", $"You think {CurrentlyAccused} is the killer...");
+        if (CurrentlyAccused == "Unknown")
+        {
+            SetStatText("Accused", $"You do not know who the killer is...");
+        }
+        else
+        {
+            SetStatText("Accused", $"You think {CurrentlyAccused} is the killer...");
+            PlayAudio("GeneralAudio", "EnvSounds/DrumRoll");
 
-        PlayAudio("GeneralAudio", "EnvSounds/DrumRoll");
-        yield return new WaitForSeconds(3*DELAY);
-        PlayAudio("GeneralAudio", "EnvSounds/TypeWriter");
-        SetStatText("FoundTheMurderer", CurrentlyAccused == "Burke" ? "... and you are CORRECT!" : "... and you are WRONG!");
+            yield return new WaitForSeconds(3 * DELAY);
+            PlayAudio("GeneralAudio", "EnvSounds/TypeWriter");
+            SetStatText("FoundTheMurderer", CurrentlyAccused == "Burke" ? "... and you are CORRECT!" : "... and you are WRONG!");
+        }
+
 
         yield return new WaitForSeconds(2*DELAY);
         PlayAudio("GeneralAudio", "EnvSounds/Typewriter");
@@ -125,7 +133,7 @@ public class VerdictManager : MonoBehaviour
     {
         if (GameState.EvidenceFound.Count < GameState.TOTAL_EVIDENCE_COUNT)
         {
-            SetStatText("Hint", "Hint: You can hold 'A' to show all evidence in a room."); // Modify this when hint button is set
+            SetStatText("Hint", "Hint: You can hold 'A' to show all evidence in a room.");
             return;
         }
 
@@ -168,7 +176,7 @@ public class VerdictManager : MonoBehaviour
         {
             GameState.LiedCount[speaker] = 0;
         }
-        SceneManager.LoadScene("Hallway", LoadSceneMode.Single); // Change this to intro when fully merged
+        SceneManager.LoadScene("Hallway", LoadSceneMode.Single);
     }
 
     public void ExitGame()
