@@ -6,7 +6,12 @@ public class DoorController : MonoBehaviour
 {
     
     [SerializeField] private string sceneToLoad; // Scene to load after opening the door
-    
+
+    public void Start()
+    {
+        DynamicGI.UpdateEnvironment();
+    }
+
     public void LoadScene()
     {
         if (!string.IsNullOrEmpty(sceneToLoad))
