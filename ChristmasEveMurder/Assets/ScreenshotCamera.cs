@@ -5,7 +5,9 @@ using System.Collections;
 public class ScreenshotCamera : MonoBehaviour
 {
     public Camera screenshotCamera; // Camera secundară pentru captură
+    public Camera mainCamera; // Camera principală
     public Canvas cameraFrameCanvas; // Canvas pentru frame
+    public GameObject cameraFrame; // Frame-ul camerei
     public Image flashEffect; // Efect de flash
     public KeyCode takeScreenshotKey = KeyCode.P; // Tasta pentru captură
     public string screenshotFolder = "E:/GitHub/ChristmasEveMurderVR/ChristmasEveMurder/Screenshots"; // Director pentru capturi
@@ -28,50 +30,66 @@ public class ScreenshotCamera : MonoBehaviour
             Debug.Log($"Folder deja există: {screenshotFolder}");
         }
 
-        // Dezactivează elementele la start
-        cameraFrameCanvas?.gameObject.SetActive(false);
-        screenshotCamera?.gameObject.SetActive(false);
+        // Dezactivează efectele la start
         flashEffect?.gameObject.SetActive(false);
     }
 
     void Update()
     {
-        Debug.Log("Update() este apelată.");
+        // Sincronizează rama cu Main Camera în timpul jocului
+        SyncCameraFrameToMainCamera();
 
         // Verifică dacă tasta pentru captură este apăsată
         if (!isTakingScreenshot && Input.GetKeyDown(takeScreenshotKey))
         {
-            Debug.Log($"Tasta {takeScreenshotKey} a fost apăsată. Începem captura de ecran.");
             StartCoroutine(TakeScreenshot());
+        }
+    }
+
+    private void SyncScreenshotCameraWithMainCamera()
+    {
+        if (mainCamera != null && screenshotCamera != null)
+        {
+            // Sincronizează poziția și rotația
+            screenshotCamera.transform.position = mainCamera.transform.position;
+            screenshotCamera.transform.rotation = mainCamera.transform.rotation;
+
+            // Sincronizează setările camerei
+            screenshotCamera.fieldOfView = mainCamera.fieldOfView;
+            screenshotCamera.nearClipPlane = mainCamera.nearClipPlane;
+            screenshotCamera.farClipPlane = mainCamera.farClipPlane;
+            screenshotCamera.clearFlags = mainCamera.clearFlags;
+            screenshotCamera.backgroundColor = mainCamera.backgroundColor;
+            screenshotCamera.cullingMask = mainCamera.cullingMask;
+        }
+    }
+
+    private void SyncCameraFrameToMainCamera()
+    {
+        if (cameraFrame != null && mainCamera != null)
+        {
+            // Poziționează rama ușor în fața camerei principale
+            float distanceInFront = 0.1f; // Ajustează distanța
+            cameraFrame.transform.position = mainCamera.transform.position + mainCamera.transform.forward * distanceInFront;
+
+            // Sincronizează orientarea ramei cu camera principală
+            cameraFrame.transform.rotation = mainCamera.transform.rotation;
         }
     }
 
     private IEnumerator TakeScreenshot()
     {
-        Debug.Log("Începerea capturii de ecran.");
         isTakingScreenshot = true;
 
-        // Activare frame și cameră
-        if (cameraFrameCanvas != null)
-        {
-            cameraFrameCanvas.gameObject.SetActive(true);
-            Debug.Log("Canvas activat.");
-        }
-
-        if (screenshotCamera != null)
-        {
-            screenshotCamera.gameObject.SetActive(true);
-            Debug.Log("Camera de screenshot activată.");
-        }
+        // Sincronizează camera de screenshot cu camera principală
+        SyncScreenshotCameraWithMainCamera();
 
         // Activare efect flash
         if (flashEffect != null)
         {
             flashEffect.gameObject.SetActive(true);
-            Debug.Log("Efectul de flash activat.");
             yield return new WaitForSeconds(flashDuration);
             flashEffect.gameObject.SetActive(false);
-            Debug.Log("Efectul de flash dezactivat.");
         }
 
         // Așteaptă până la finalul frame-ului pentru a captura imaginea corect
@@ -99,19 +117,6 @@ public class ScreenshotCamera : MonoBehaviour
         screenshotCamera.targetTexture = null;
         RenderTexture.active = null;
         Destroy(renderTexture);
-
-        // Dezactivare frame și cameră
-        if (cameraFrameCanvas != null)
-        {
-            cameraFrameCanvas.gameObject.SetActive(false);
-            Debug.Log("Canvas dezactivat.");
-        }
-
-        if (screenshotCamera != null)
-        {
-            screenshotCamera.gameObject.SetActive(false);
-            Debug.Log("Camera de screenshot dezactivată.");
-        }
 
         isTakingScreenshot = false;
         Debug.Log("Captura de ecran finalizată.");

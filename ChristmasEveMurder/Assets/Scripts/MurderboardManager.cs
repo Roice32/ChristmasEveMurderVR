@@ -15,6 +15,37 @@ public class MurderboardManager : MonoBehaviour
     private GameObject highlightedPicture = null;
     private GameObject associatedPin = null;
 
+    public void Awake()
+    {
+        GameObject evidencePics = GameObject.Find("EvidencePics");
+        foreach (Transform child in evidencePics.transform)
+        {
+            if (GameState.EvidenceFound.Contains(child.name))
+            {
+                child.gameObject.SetActive(true);
+            }
+            else
+            {
+                child.gameObject.SetActive(false);
+            }
+        }
+        
+        GameObject ransomNote = GameObject.Find("note");
+        if (GameState.EvidenceFound.Contains("RansomNote"))
+        {
+            ransomNote.SetActive(true);
+        }
+        else
+        {
+            ransomNote.SetActive(false);
+        }
+    }
+
+    public void Start()
+    {
+        DynamicGI.UpdateEnvironment();
+    }
+
     public void OnPinSelected(GameObject selectedPin)
     {
         if (firstSelectedPin == null)
