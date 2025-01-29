@@ -7,7 +7,7 @@
 
   "Entries": {
     "Start": {
-      "DialogueLine": "I don’t know what you expect me to say.This whole thing doesn’t feel real.She was my sister...",
+      "DialogueLine": "I don’t know what you expect me to say. This whole thing doesn’t feel real. She was my sister...",
       "AudioFile": "Voicelines/Burke/first-replica-burke",
       "IsChoiceNode": true,
       "Choice1": {
@@ -23,7 +23,7 @@
     },
 
     "Q1-Default": {
-      "DialogueLine": "No, I never felt like I was in danger. Our home was supposed to be safe—somewhere nothing bad could ever reach us.",
+      "DialogueLine": "No, I never felt like I was in danger. Our home was supposed to be safe— somewhere nothing bad could ever reach us.",
       "AudioFile": "Voicelines/Burke/q1-default-burke",
       "IsChoiceNode": true,
       "Choice1": {
@@ -66,7 +66,7 @@
         "NextTruth": "Q5-Truth"
       },
       "Choice2": {
-        "Text": "I never mentioned she was murdered...",
+        "Text": "Are you shocked about what happened?",
         "StressPoints": 2,
         "NextTruth": "Q1-Lie"
       }
@@ -94,31 +94,14 @@
       "AudioFile": "Voicelines/Burke/q1-burke-v2",
       "IsChoiceNode": true,
       "Choice1": {
-        "Text": "Your parents said the flashlight belongs to you. Can you confirm that?",
+        "Text": "Were you jealous of the attention she got?",
         "StressPoints": 2,
-        "NextTruth": "Q2-Truth"
+        "NextTruth": "Q4-Truth",
+        "NextLie": "Q4-Lie"
       },
       "Choice2": {
-        "Text": "You were the only one who ate pineapple that night, yet pieces were found in the victim’s stomach. How do you explain that?",
-        "StressPoints": 0,
-        "NextTruth": "Q3-Truth",
-        "NextLie": "Q3-Lie"
+        "Text": "Calm down, Burke. I just want to solve this case."
       }
-    },
-
-    "Q2-Truth": {
-      "DialogueLine": "Yes, it’s mine. I lost something under my bed earlier that evening and used the flashlight to look for it.",
-      "AudioFile": "Voicelines/Burke/q2-burke"
-    },
-
-    "Q3-Truth": {
-      "DialogueLine": "I don’t know what to say. Yes, I ate pineapple, but I don’t understand how that matters. I never expected something like this to happen in my own home.",
-      "AudioFile": "Voicelines/Burke/q3-burke-v1"
-    },
-
-    "Q3-Lie": {
-      "DialogueLine": "How am I supposed to explain that? I didn’t even notice she ate any. Maybe someone else gave it to her. It’s not like I was keeping track.",
-      "AudioFile": "Voicelines/Burke/q3-burke-v2"
     },
 
     "Q4-Truth": {
@@ -135,7 +118,6 @@
       "DialogueLine": "It’s complicated. I regret a lot of things now. I wish I’d been a better brother, but I can’t change how things were. This whole situation is horrible, and I’m trying to process it like everyone else.",
       "AudioFile": "Voicelines/Burke/q5-burke"
     },
-
 
     "RansomNote": {
       "DialogueLine": "That ransom note... I've read it. I wish I hadn't.",
@@ -176,8 +158,7 @@
       "AudioFile": "Voicelines/Burke/RansomNote2L",
       "ChoiceNext": {
         "StressPoints": 2,
-        "NextTruth": "RansomNote2L-T",
-        "NextLie": "Q3-Lie"
+        "NextTruth": "RansomNote2L-T"
       }
     },
 
@@ -189,6 +170,67 @@
     "ExhaustedDialogue": {
       "DialogueLine": "We've already talked everything there was to talk about.",
       "AudioFile": "Voicelines/Burke/Exhausted"
+    },
+
+    "PinappleBowl": {
+      "DialogueLine": "I don’t know what to say. Yes, I ate pineapple, but I don’t understand how that matters. I never expected something like this to happen in my own home.",
+      "AudioFile": "Voicelines/Burke/q3-burke-v1",
+      "ChoiceNext": {
+        "NextTruth": "PinappleBowl-V1"
+      }
+    },
+
+    "PinappleBowl-V1": {
+      "DialogueLine": "How am I supposed to explain that? I didn’t even notice she ate any. Maybe someone else gave it to her. It’s not like I was keeping track.",
+      "AudioFile": "Voicelines/Burke/q3-burke-v2"
+    },
+
+    "Lantern": {
+      "DialogueLine": "Oh that's my lantern. Is that relevant to the case?",
+      "AudioFile": "Voicelines/Burke/Lantern",
+      "IsChoiceNode": true,
+      "Choice1": {
+        "Text": "Why was it in the living room?",
+        "NextTruth": "Lantern1T"
+      },
+      "Choice2": {
+        "Text": "We found a bloodstain on it. Care to explain?",
+        "StressPoints": 2,
+        "NextTruth": "Lantern2T"
+      }
+    },
+
+    "Lantern1T": {
+      "DialogueLine": "I lost something under my bed the other night. I used it to see under my bed.",
+      "AudioFile": "Voicelines/Burke/Lantern1T",
+      "ChoiceNext": {
+        "NextTruth": "Lantern1T-T"
+      }
+    },
+
+    "Lantern1T-T": {
+      "DialogueLine": "I, I don't know how it got there, where you found it.",
+      "AudioFile": "Voicelines/Burke/Lantern1T-T"
+    },
+
+    "Lantern2T": {
+      "DialogueLine": "WHAT?! I, I don't know anything about that.",
+      "AudioFile": "Voicelines/Burke/Lantern2T",
+      "ChoiceNext": {
+        "StressPoints": 2,
+        "NextTruth": "Lantern2T-T",
+        "NextLie": "Lantern2T-L"
+      },
+
+      "Lantern2T-T": {
+        "DialogueLine": "It's just a lantern. I don't know what you're after.",
+        "AudioFile": "Voicelines/Burke/Lantern2T-T"
+      },
+
+      "Lantern2T-L": {
+        "DialogueLine": "Someone else must've used it, for sure. I had nothing to do with the murder.",
+        "AudioFile": "Voicelines/Burke/Lantern2T-L"
+      }
     }
   }
 }
