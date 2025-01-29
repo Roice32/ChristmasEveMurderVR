@@ -16,9 +16,18 @@ public class Dialogue
             if (IsInProgress)
             {
                 GetEvidenceEntry();
-                return Entries[CurrentEntry ?? "ExhaustedDialogue"];
+                if (CurrentEntry is null || !Entries.ContainsKey(CurrentEntry))
+                {
+                    return Entries["ExhaustedDialogue"];
+                }
+                return Entries[CurrentEntry];
             }
             return null;
+        }
+
+        if (!Entries.ContainsKey(CurrentEntry))
+        {
+            return Entries["ExhaustedDialogue"];
         }
         return Entries[CurrentEntry];
     }

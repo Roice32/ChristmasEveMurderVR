@@ -7532,6 +7532,19 @@ MonoBehaviour:
   stobok: {fileID: 649476676}
   sclipirici: {fileID: 1601026432}
   sparkleTime: 2
+--- !u!114 &579038578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 579038569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16f0479ee476e9644a21255073c99c12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionAudio: {fileID: 8300000, guid: 3f76b28b805aa6840b5968f16edf1d68, type: 3}
 --- !u!1001 &646083072
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8233,38 +8246,6 @@ MonoBehaviour:
   stobok: {fileID: 1490990032}
   sclipirici: {fileID: 5886504}
   sparkleTime: 2
---- !u!1 &780294661 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -8358930465229049483, guid: 9299e47c0f75142439ba10c00beeb4c7, type: 3}
-  m_PrefabInstance: {fileID: 2145255950}
-  m_PrefabAsset: {fileID: 0}
---- !u!54 &780294665
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 780294661}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1001 &785409564
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10164,6 +10145,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a37f1909cc7eccf4aba982b96f89db13, type: 3}
       insertIndex: -1
       addedObject: {fileID: 579038576}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a37f1909cc7eccf4aba982b96f89db13, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 579038578}
   m_SourcePrefab: {fileID: 100100000, guid: a37f1909cc7eccf4aba982b96f89db13, type: 3}
 --- !u!1001 &1183639292
 PrefabInstance:
@@ -25809,14 +25793,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6454594071094758631, guid: 895f6f3c2d334633b5800312285058d2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7313654230448209575, guid: 895f6f3c2d334633b5800312285058d2, type: 3}
       propertyPath: m_Name
       value: XR Interaction Setup
       objectReference: {fileID: 0}
+    - target: {fileID: 8677371567480465662, guid: 895f6f3c2d334633b5800312285058d2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9014170783705847993, guid: 895f6f3c2d334633b5800312285058d2, type: 3}
+      propertyPath: m_ModelPrefab
+      value: 
+      objectReference: {fileID: 177788625783376083, guid: d86ffc30588d6bb4e9fcff8059e50dc2, type: 3}
     - target: {fileID: 9014170783809206330, guid: 895f6f3c2d334633b5800312285058d2, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9014170785475729497, guid: 895f6f3c2d334633b5800312285058d2, type: 3}
+      propertyPath: m_ModelPrefab
+      value: 
+      objectReference: {fileID: 2853174202979218098, guid: 7cc5da24be1ffe9449ccbf81c6ddd4ef, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -27757,9 +27757,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7408357401567767066, guid: 9299e47c0f75142439ba10c00beeb4c7, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1838574918}
-    - targetCorrespondingSourceObject: {fileID: -8358930465229049483, guid: 9299e47c0f75142439ba10c00beeb4c7, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 780294665}
   m_SourcePrefab: {fileID: 100100000, guid: 9299e47c0f75142439ba10c00beeb4c7, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

@@ -17,17 +17,17 @@ public class ScreenshotCamera : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("Scriptul ScreenshotCamera a pornit.");
+       // Debug.Log("Scriptul ScreenshotCamera a pornit.");
 
         // Creează folderul pentru capturi dacă nu există
         if (!System.IO.Directory.Exists(screenshotFolder))
         {
             System.IO.Directory.CreateDirectory(screenshotFolder);
-            Debug.Log($"Folder creat: {screenshotFolder}");
+           // Debug.Log($"Folder creat: {screenshotFolder}");
         }
         else
         {
-            Debug.Log($"Folder deja există: {screenshotFolder}");
+           // Debug.Log($"Folder deja există: {screenshotFolder}");
         }
 
         // Dezactivează efectele la start
@@ -111,7 +111,7 @@ public class ScreenshotCamera : MonoBehaviour
         byte[] bytes = screenshot.EncodeToPNG();
         string screenshotPath = $"{screenshotFolder}/Screenshot_{System.DateTime.Now:yyyy-MM-dd_HH-mm-ss}.png";
         System.IO.File.WriteAllBytes(screenshotPath, bytes);
-        Debug.Log($"Screenshot salvat la: {screenshotPath}");
+        //Debug.Log($"Screenshot salvat la: {screenshotPath}");
 
         // Cleanup
         screenshotCamera.targetTexture = null;
@@ -119,12 +119,12 @@ public class ScreenshotCamera : MonoBehaviour
         Destroy(renderTexture);
 
         isTakingScreenshot = false;
-        Debug.Log("Captura de ecran finalizată.");
+        //Debug.Log("Captura de ecran finalizată.");
     }
 
     void OnDisable()
     {
-        Debug.LogWarning("Scriptul ScreenshotCamera a fost dezactivat!");
+        /*Debug.LogWarning("Scriptul ScreenshotCamera a fost dezactivat!");*/
     }
 
     void OnEnable()
