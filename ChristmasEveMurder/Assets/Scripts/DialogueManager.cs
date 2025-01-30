@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class DialogueManager : MonoBehaviour
 {
-    private readonly List<string> SPEAKERS = new() { "Burke", "Patsy" };
+    private readonly List<string> SPEAKERS = new() { "Burke", "Patsy" , "John"};
     private readonly Vector3 SUSPECT_HEAD_POSITION = new Vector3(0.0f, 1.094f, 0.612f);
     private readonly Vector3 EVIDENCE_ON_TABLE_POSITION = new Vector3(-0.531f, 1.0577f, -1.841f);
     private readonly Quaternion EVIDENCE_ON_TABLE_ROTATION = Quaternion.Euler(180.0f, 0.0f, 90.0f);
@@ -66,7 +66,6 @@ public class DialogueManager : MonoBehaviour
                 CurrentSuspect.SetActive(false);
                 AudioSource.Stop();
                 DialogueUI.SetActive(false);
-                Debug.Log(Dialogues[CurrentSpeaker].Entries);
             }
 
             suspectTransform.gameObject.SetActive(true);

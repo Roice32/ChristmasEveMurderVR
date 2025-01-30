@@ -8,7 +8,7 @@ public static class GameState
 
     static GameState()
     {
-        EvidenceFound = /*new List<string>();*/ new List<string>{ "BloodstainedPainting", "Body", "OpenPaintCan", "PaintingSupplies", "RansomNote", "PineappleBowl", "Lantern" };
+        EvidenceFound = new List<string>();
         LiedCount = new Dictionary<string, int>
         {
             { "Burke", 0 },

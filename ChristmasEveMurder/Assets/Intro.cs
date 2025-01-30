@@ -5,10 +5,11 @@ using UnityEngine.UI;
 
 public class SceneTransition : MonoBehaviour
 {
-    public float delay = 45f; // Timpul total până la încărcarea scenei
+    public float delay = 48f; // Timpul total până la încărcarea scenei
     public string nextSceneName; // Numele scenei următoare
     public Image fadeImage; // Imaginea pentru efectul de fade (din Canvas)
     public float fadeDuration = 2f; // Durata efectului de fade (la început și la sfârșit)
+    [SerializeField] AudioSource audioSource; // Sursa audio pentru efectul de fade
 
     private void Start()
     {
@@ -20,13 +21,21 @@ public class SceneTransition : MonoBehaviour
 
         // Fade-in la începutul scenei
         StartCoroutine(FadeIn());
+        StartCoroutine(PlayAudio());
 
         // Fade-out care începe la secunda 43.5
-        Invoke("StartFadeOut", 43.5f);
+        Invoke("StartFadeOut", 50.5f);
 
         // Încarcă scena după delay (45 secunde)
         Invoke("LoadNextScene", delay);
     }
+    
+    private IEnumerator PlayAudio()
+    {
+        yield return new WaitForSeconds(7f);
+        audioSource.Play();
+    }
+
 
     private IEnumerator FadeIn()
     {

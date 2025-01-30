@@ -133,7 +133,7 @@ public class VerdictManager : MonoBehaviour
     {
         if (GameState.EvidenceFound.Count < GameState.TOTAL_EVIDENCE_COUNT)
         {
-            SetStatText("Hint", "Hint: You can hold 'A' to show all evidence in a room.");
+            SetStatText("Hint", "Hint: You can press 'B' to show all evidence in a room.");
             return;
         }
 

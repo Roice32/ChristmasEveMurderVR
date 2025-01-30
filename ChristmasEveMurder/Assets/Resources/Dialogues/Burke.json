@@ -51,7 +51,7 @@
       },
       "Choice2": {
         "Text": "Do you regret how your relationship with her was?",
-        "StressPoints": 0,
+        "StressPoints": 2,
         "NextTruth": "Q5-Truth"
       }
     },

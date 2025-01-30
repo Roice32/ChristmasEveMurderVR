@@ -97,6 +97,7 @@ public class Dialogue
         string nextEntryKey = null;
         if (IsGoingToLie() && selectedChoice.NextLie is not null)
         {
+            GameState.AddLie(SpeakerName);
             nextEntryKey = selectedChoice.NextLie;
         }
         else
