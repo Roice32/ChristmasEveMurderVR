@@ -1,0 +1,83 @@
+{
+  "SpeakerName": "John",
+  "CurrentEntry": "Start",
+  "IsInProgress": false,
+  "StressPoints": 0,
+  "ExhaustedEvidenceDialogues": [],
+
+  "Entries": {
+    "Start": {
+      "DialogueLine": "This has been the worst nightmare of my life. I just want answers, but it feels like I’m the one on trial here.",
+      "AudioFile": "Voicelines/John/first-replica-john",
+      "IsChoiceNode": true,
+      "Choice1": {
+        "Text": "Did you ever feel in danger?",
+        "NextTruth": "Q1-Default"
+      },
+      "Choice2": {
+        "Text": "What do you think about the body being found in the basement?",
+        "NextTruth": "Q2-Default"
+      }
+    },
+
+    "Q1-Default": {
+      "DialogueLine": "Danger? Never. Our home was always a sanctuary for our family, a place where we were supposed to feel protected. I never thought something so horrific could happen under our own roof.",
+      "AudioFile": "Voicelines/John/q1-default-john",
+      "ChoiceNext": {
+        "NextTruth": "Q3-Default"
+      }
+    },
+
+    "Q2-Default": {
+      "DialogueLine": "The basement was such an out-of-the-way place. It wasn’t a space we used much, except Patsy occasionally going there to paint. It’s eerie to think that something so horrible could happen in a spot we barely paid attention to.",
+      "AudioFile": "Voicelines/John/q2-default-john"
+    },
+
+    "Q3-Default": {
+      "DialogueLine": "I don’t know why her. Maybe it was because she was more in the public eye with her pageants. She loved performing, and it made her stand out in ways the rest of us didn’t. It’s cruel to think that could’ve made her a target.",
+      "AudioFile": "Voicelines/John/q3-default-john"
+    },
+
+    "MoveBody": {
+      "DialogueLine": "I brought my child into the living room, hoping there was still a chance to save her. It was instinct—something any parent would do.",
+      "AudioFile": "Voicelines/John/q1-john-v1",
+      "ChoiceNext": {
+        "Text": "Why did you move the body from where it was found?",
+        "NextTruth": "MoveBody2"
+      }
+    },
+
+    "MoveBody2": {
+      "DialogueLine": "I didn’t know what else to do. Seeing her there, in that condition... I panicked and just acted without thinking.",
+      "AudioFile": "Voicelines/John/q1-john-v2"
+    },
+
+    "BasementInstinct": {
+      "DialogueLine": "A parent’s instinct is hard to explain. Something deep inside me told me that’s where I’d find her.",
+      "AudioFile": "Voicelines/John/q2-john-v1",
+      "ChoiceNext": {
+        "Text": "Why did you suspect she was in the basement, even though the area had only been minimally searched?",
+        "NextTruth": "BasementInstinct2"
+      }
+    },
+
+    "BasementInstinct2": {
+      "DialogueLine": "I had this gnawing feeling about the basement. It didn’t make sense, but I couldn’t ignore it, so I checked again.",
+      "AudioFile": "Voicelines/John/q2-john-v2"
+    },
+
+    "RansomMoney": {
+      "DialogueLine": "I recently received a large bonus at work, and the success of the project I led is widely known in the community. I don’t think it was someone close to me, but clearly, they knew about the money.",
+      "AudioFile": "Voicelines/John/q3-john-v1",
+      "ChoiceNext": {
+        "Text": "Why do you think they asked for that specific amount of money? Do you believe they were people close to you?",
+        "NextTruth": "RansomMoney2"
+      }
+    },
+
+    "RansomMoney2": {
+      "DialogueLine": "The amount matches the bonus I got from work. It’s public knowledge in our community because of how successful the project was. I can’t say for sure if it’s someone close, but they clearly did their homework.",
+      "AudioFile": "Voicelines/John/q3-john-v2"
+    }
+  }
+}

@@ -1,0 +1,157 @@
+{
+  "SpeakerName": "Patsy",
+  "CurrentEntry": "Start",
+  "IsInProgress": false,
+  "StressPoints": 0,
+  "ExhaustedEvidenceDialogues": [],
+
+  "Entries": {
+    "Start": {
+      "DialogueLine": "My world has fallen apart, and now I feel like I'm being accused of things I could never do. I loved my daughter more than anything.",
+      "AudioFile": "Voicelines/Patsy/first-replica-patsy",
+      "IsChoiceNode": true,
+      "Choice1": {
+        "Text": "Did you ever feel in danger?",
+        "StressPoints": -1,
+        "NextTruth": "Q1-Default"
+      },
+      "Choice2": {
+        "Text": "What do you think about the body being found in the basement?",
+        "StressPoints": 2,
+        "NextTruth": "Q2-Default"
+      }
+    },
+
+    "Q1-Default": {
+      "DialogueLine": "I never felt unsafe in our home. It always seemed like a place where nothing bad could happen-a bubble of security. Looking back now, it's hard to reconcile that feeling with what happened.",
+      "AudioFile": "Voicelines/Patsy/patsy-q3-v1",
+      "ChoiceNext": {
+        "Text": "Why her specifically, when any family member could have been the target?",
+        "StressPoints": 2,
+        "NextTruth": "Q3-Default"
+      }
+    },
+
+      "Q2-Default": {
+        "DialogueLine": "That basement was my quiet space, where I would go to paint and unwind. I can't understand how something so terrible could happen in a place that brought me peace.",
+        "AudioFile": "Voicelines/Patsy/q2-patsy",
+        "IsChoiceNode": true,
+        "Choice1": {
+          "Text": "Why her specifically, when any family member could have been the target?",
+          "StressPoints": 2,
+          "NextTruth": "Q3-Default"
+        },
+        "Choice2": {
+          "Text": "Do you think someone close to the family could have done this?",
+          "StressPoints": 2,
+          "NextTruth": "Q6-Truth"
+        }
+      },
+
+        "Q3-Default": {
+          "DialogueLine": "She was well-known because of her success in beauty pageants. Her face and name were out there for everyone to see, which might have made her a more visible target. It feels unfair that something she loved might have drawn this tragedy to her.",
+          "AudioFile": "Voicelines/Patsy/patsy-default-v2",
+          "ChoiceNext": {
+            "Text": "Why did you call 911 before thoroughly checking the entire house?",
+            "StressPoints": 1,
+            "NextTruth": "Q5-Truth"
+          }
+        },
+
+
+        "Q5-Truth": {
+          "DialogueLine": "I was in shock. When I found the note, my first instinct was to call for help-I wasn't thinking clearly.",
+          "AudioFile": "Voicelines/Patsy/q3-patsy",
+          "IsChoiceNode": false,
+          "NextTruth": "End"
+        },
+
+        "Q6-Truth": {
+          "DialogueLine": "I don't want to believe it, but it's possible. Someone who knew our routines, our home, and our family dynamics could have done this. It's horrifying to think about.",
+          "AudioFile": "Voicelines/Patsy/patsy-v1",
+          "IsChoiceNode": false,
+          "NextTruth": "End"
+        },
+
+
+        "RansomNote": {
+          "DialogueLine": "That ransom note... I've read it. I wish I hadn't.",
+          "AudioFile": "Voicelines/Patsy/RansomNote",
+          "IsChoiceNode": true,
+          "Choice1": {
+            "Text": "That sum is very specific...",
+            "NextTruth": "RansomNote1T"
+          },
+          "Choice2": {
+            "Text": "Does the writing seem familiar to you?",
+            "StressPoints": 2,
+            "NextTruth": "RansomNote2T",
+            "NextLie": "RansomNote2L"
+          }
+        },
+
+        "RansomNote1T": {
+          "DialogueLine": "Yes, they must've based it on something... They can't be total strangers to us.",
+          "AudioFile": "Voicelines/Patsy/RansomNote1T"
+        },
+
+        "RansomNote2T": {
+          "DialogueLine": "I... I don't know. I can't think straight right now.",
+          "AudioFile": "Voicelines/Patsy/RansomNote2T",
+          "ChoiceNext": {
+            "NextTruth": "RansomNote2T-T"
+          }
+        },
+
+        "RansomNote2T-T": {
+          "DialogueLine": "You think you can catch them based on that? I don't know...",
+          "AudioFile": "Voicelines/Patsy/RansomNote2T-T"
+        },
+
+        "RansomNote2L": {
+          "DialogueLine": "Uhm.. No, of course not. No, I don't recognize it. Why would I?",
+          "AudioFile": "Voicelines/Patsy/RansomNote2L",
+          "ChoiceNext": {
+            "StressPoints": 2,
+            "NextTruth": "RansomNote2L-T"
+          }
+        },
+
+        "RansomNote2L-T": {
+          "DialogueLine": "I'm sorry, I'm on edge.",
+          "AudioFile": "Voicelines/Patsy/RansomNote2L-T"
+        },
+
+        "PaintingSupplies": {
+          "DialogueLine": "The basement was my quiet space. I used to go there to paint and unwind. It's hard to believe something so terrible happened there.",
+          "AudioFile": "Voicelines/Patsy/PaintingSupplies",
+          "IsChoiceNode": true,
+          "Choice1": {
+            "Text": "Did you notice anything unusual down there recently?",
+            "StressPoints": 1,
+            "NextTruth": "PaintingSupplies1T"
+          },
+          "Choice2": {
+            "Text": "Why do you think the basement was chosen as the location?",
+            "StressPoints": 2,
+            "NextTruth": "PaintingSupplies2T"
+          }
+        },
+
+        "PaintingSupplies1T": {
+          "DialogueLine": "No, nothing unusual. It was always just my quiet place to paint.",
+          "AudioFile": "Voicelines/Patsy/PaintingSupplies1T"
+        },
+
+        "PaintingSupplies2T": {
+          "DialogueLine": "I don't know. Maybe because it's secluded and rarely used. It's horrifying to think about.",
+          "AudioFile": "Voicelines/Patsy/PaintingSupplies2T"
+        },
+
+
+        "ExhaustedDialogue": {
+          "DialogueLine": "We've already talked everything there was to talk about.",
+          "AudioFile": "Voicelines/Patsy/Exhausted"
+        }
+      }
+}
